@@ -20,7 +20,16 @@ const recordButton = document.getElementById("record-button");
 const timerElement = document.getElementById("timer");
 
 // --- Global Control Variables ---
-let controls = { launchFreq: 20, gravity: 0.02, trailLength: 0.1, speed: 2, sizeMin: 1, sizeMax: 3 };
+let controls = {
+  launchFreq: 20,
+  gravity: 0.02,
+  trailLength: 0.1,
+  speed: 2,
+  sizeMin: 1,
+  sizeMax: 3,
+  globalSpeed: 1,
+  particleCount: 150
+};
 let fireworks = [];
 let particles = [];
 // HSL colors provide vibrant, well-matched firework colors
@@ -61,7 +70,9 @@ const setupControlListener = (id, property, valueId, multiplier = 1, fixed = 2) 
 setupControlListener("launch-freq", "launchFreq", "launch-freq-value", 1, 0);
 setupControlListener("gravity", "gravity", "gravity-value", 0.01, 2);
 setupControlListener("trail-length", "trailLength", "trail-length-value", 0.01, 2);
+setupControlListener("particle-count", "particleCount", "particle-count-value", 1, 0);
 setupControlListener("speed", "speed", "speed-value", 1, 1);
+setupControlListener("global-speed", "globalSpeed", "global-speed-value", 1, 1);
 setupControlListener("size-min", "sizeMin", "size-min-value", 1, 1);
 setupControlListener("size-max", "sizeMax", "size-max-value", 1, 1);
 
@@ -153,10 +164,10 @@ class Particle {
     this.decay = random(0.015, 0.03);
   }
   update() {
-    this.x += this.velocity.x;
-    this.y += this.velocity.y;
-    this.velocity.y += controls.gravity;
-    this.alpha -= this.decay;
+    this.x += this.velocity.x * controls.globalSpeed;
+    this.y += this.velocity.y * controls.globalSpeed;
+    this.velocity.y += controls.gravity * controls.globalSpeed;
+    this.alpha -= this.decay * controls.globalSpeed;
   }
   draw() {
     ctx.save();
@@ -182,8 +193,8 @@ class Firework {
   }
   update() {
     if (!this.exploded) {
-      this.x += this.velocity.x;
-      this.y += this.velocity.y;
+      this.x += this.velocity.x * controls.globalSpeed;
+      this.y += this.velocity.y * controls.globalSpeed;
       this.trail.push(new Particle(this.x, this.y, this.color));
       if (this.y <= this.targetY) {
         this.exploded = true;
@@ -199,7 +210,7 @@ class Firework {
     }
   }
   explode() {
-    const particleCount = random(100, 200);
+    const particleCount = controls.particleCount;
     for (let i = 0; i < particleCount; i++) {
       const angle = random(0, Math.PI * 2);
       const speed = random(1, 5);
