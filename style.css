@@ -1,0 +1,74 @@
+body {
+  background-color: #000;
+  margin: 0;
+  overflow: hidden;
+  font-family: "Inter", sans-serif;
+}
+canvas {
+  display: block;
+}
+.controls {
+  position: fixed;
+  bottom: 20px;
+  left: 20px;
+  background-color: rgba(30, 30, 42, 0.7);
+  backdrop-filter: blur(10px);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  color: white;
+  padding: 20px;
+  border-radius: 12px;
+  z-index: 10;
+  width: 300px;
+  box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+}
+.control-group {
+  margin-bottom: 15px;
+}
+.control-group label {
+  display: block;
+  font-size: 14px;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+.control-group input[type="range"] {
+  width: 100%;
+  -webkit-appearance: none;
+  appearance: none;
+  background: transparent;
+  cursor: pointer;
+}
+/* Styling for range input track */
+.control-group input[type="range"]::-webkit-slider-runnable-track {
+  background: rgba(255, 255, 255, 0.2);
+  height: 4px;
+  border-radius: 2px;
+}
+.control-group input[type="range"]::-moz-range-track {
+  background: rgba(255, 255, 255, 0.2);
+  height: 4px;
+  border-radius: 2px;
+}
+/* Styling for range input thumb */
+.control-group input[type="range"]::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  margin-top: -6px; /* center thumb on track */
+  background-color: #4a90e2;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+.control-group input[type="range"]::-moz-range-thumb {
+  background-color: #4a90e2;
+  height: 16px;
+  width: 16px;
+  border-radius: 50%;
+  border: 2px solid white;
+}
+.control-group .value-display {
+  float: right;
+  font-size: 14px;
+  font-weight: 600;
+  color: #ccc;
+}

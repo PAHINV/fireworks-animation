@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Interactive Fireworks Animation</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+
+  <body>
+    <canvas id="fireworksCanvas"></canvas>
+
+    <div class="controls">
+      <h2 class="text-lg font-bold mb-4">Fireworks Controls</h2>
+
+      <div class="control-group">
+        <label for="launch-freq">Launch Rate <span class="value-display" id="launch-freq-value">20</span></label>
+        <input type="range" id="launch-freq" min="1" max="100" value="20" />
+      </div>
+
+      <div class="control-group">
+        <label for="gravity">Gravity <span class="value-display" id="gravity-value">0.02</span></label>
+        <input type="range" id="gravity" min="0" max="10" value="2" />
+      </div>
+
+      <div class="control-group">
+        <label for="trail-length">Trail Length <span class="value-display" id="trail-length-value">0.10</span></label>
+        <input type="range" id="trail-length" min="1" max="50" value="10" />
+      </div>
+
+      <div class="control-group">
+        <label for="speed">Rocket Speed <span class="value-display" id="speed-value">2</span></label>
+        <input type="range" id="speed" min="1" max="5" value="2" step="0.1" />
+      </div>
+
+      <div class="control-group">
+        <label for="size-min">Min Particle Size <span class="value-display" id="size-min-value">1</span></label>
+        <input type="range" id="size-min" min="0.5" max="5" value="1" step="0.1" />
+      </div>
+
+      <div class="control-group">
+        <label for="size-max">Max Particle Size <span class="value-display" id="size-max-value">3</span></label>
+        <input type="range" id="size-max" min="1" max="10" value="3" step="0.1" />
+      </div>
+    </div>
+
+    <script src="/script.js"></script>
+  </body>
+</html>
