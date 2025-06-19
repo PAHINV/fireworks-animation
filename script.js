@@ -12,6 +12,7 @@ let recordedChunks = [];
 let isRecording = false;
 let recordingStartTime;
 let timerInterval;
+let originalCanvasSize = { width: 0, height: 0 };
 
 // --- UI Elements ---
 const controlsContainer = document.getElementById("controls-container");
@@ -28,7 +29,9 @@ let controls = {
   sizeMin: 1,
   sizeMax: 3,
   globalSpeed: 1,
-  particleCount: 150
+  particleCount: 150,
+  resolution: "hd",
+  framerate: 60
 };
 let fireworks = [];
 let particles = [];
@@ -76,6 +79,22 @@ setupControlListener("global-speed", "globalSpeed", "global-speed-value", 1, 1);
 setupControlListener("size-min", "sizeMin", "size-min-value", 1, 1);
 setupControlListener("size-max", "sizeMax", "size-max-value", 1, 1);
 
+const setupToggleListener = (containerId, property, dataAttribute) => {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.addEventListener("click", (e) => {
+    if (isRecording || !e.target.matches(".toggle-btn")) return;
+
+    const value = e.target.dataset[dataAttribute];
+    controls[property] = isNaN(value) ? value : parseInt(value, 10);
+
+    // Update active class
+    const currentActive = container.querySelector(".active");
+    if (currentActive) currentActive.classList.remove("active");
+    e.target.classList.add("active");
+  });
+};
+
 // --- UI Event Listeners ---
 toggleButton.addEventListener("click", () => {
   controlsContainer.classList.toggle("collapsed");
@@ -97,13 +116,32 @@ function startRecording() {
     return;
   }
   isRecording = true;
+
+  // Store original canvas size to restore it later
+  originalCanvasSize = { width: window.innerWidth, height: window.innerHeight };
+
+  const resolutions = {
+    sd: { width: 640, height: 480 },
+    hd: { width: 1280, height: 720 },
+    "2k": { width: 2048, height: 1080 },
+    "4k": { width: 3840, height: 2160 }
+  };
+
+  const { width: recWidth, height: recHeight } = resolutions[controls.resolution];
+
+  // Resize canvas for recording
+  width = recWidth;
+  height = recHeight;
+  canvas.width = width;
+  canvas.height = height;
+
   recordButton.textContent = "Stop & Save";
   recordButton.classList.add("recording");
   controlsContainer.classList.add("collapsed", "recording-active"); // Collapse panel and mark as recording
 
   recordedChunks = [];
 
-  const stream = canvas.captureStream(60); // Capture at 60fps
+  const stream = canvas.captureStream(controls.framerate); // Capture at selected fps
   mediaRecorder = new MediaRecorder(stream, { mimeType: "video/webm; codecs=vp9" });
 
   mediaRecorder.ondataavailable = (event) => {
@@ -115,7 +153,7 @@ function startRecording() {
     const url = URL.createObjectURL(blob);
     const a = document.createElement("a");
     a.href = url;
-    a.download = `fireworks-${Date.now()}.webm`;
+    a.download = `fireworks-${controls.resolution}-${controls.framerate}fps-${Date.now()}.webm`;
     document.body.appendChild(a);
     a.click();
     window.URL.revokeObjectURL(url);
@@ -150,6 +188,12 @@ function stopRecording() {
   // Stop and hide timer
   clearInterval(timerInterval);
   timerElement.classList.remove("visible");
+
+  // Restore original canvas size
+  width = originalCanvasSize.width;
+  height = originalCanvasSize.height;
+  canvas.width = width;
+  canvas.height = height;
 }
 
 // --- Particle & Firework Classes ---
@@ -273,5 +317,7 @@ window.addEventListener("resize", () => {
 
 // --- Start the animation ---
 window.onload = function () {
+  setupToggleListener("resolution-toggle", "resolution", "resolution");
+  setupToggleListener("framerate-toggle", "framerate", "framerate");
   animate();
 };

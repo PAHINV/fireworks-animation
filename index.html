@@ -61,7 +61,29 @@
           <label for="size-max">Max Particle Size <span class="value-display" id="size-max-value">3</span></label>
           <input type="range" id="size-max" min="1" max="10" value="3" step="0.1" />
         </div>
+
+        <div class="recording-settings">
+          <h3 class="text-md font-bold mb-3">Recording Settings</h3>
+          <div class="control-group">
+            <label>Resolution</label>
+            <div class="button-group" id="resolution-toggle">
+              <button class="toggle-btn" data-resolution="sd">SD</button>
+              <button class="toggle-btn active" data-resolution="hd">HD</button>
+              <button class="toggle-btn" data-resolution="2k">2K</button>
+              <button class="toggle-btn" data-resolution="4k">4K</button>
+            </div>
+          </div>
+          <div class="control-group">
+            <label>Framerate</label>
+            <div class="button-group" id="framerate-toggle">
+              <button class="toggle-btn" data-framerate="30">30</button>
+              <button class="toggle-btn active" data-framerate="60">60</button>
+              <button class="toggle-btn" data-framerate="120">120</button>
+            </div>
+          </div>
+        </div>
       </div>
+
       <div class="record-section">
         <button id="record-button" class="record-button">Record</button>
         <span id="timer">00:00</span>
