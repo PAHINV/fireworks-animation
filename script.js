@@ -10,22 +10,17 @@ canvas.height = height;
 let mediaRecorder;
 let recordedChunks = [];
 let isRecording = false;
+let recordingStartTime;
+let timerInterval;
 
 // --- UI Elements ---
 const controlsContainer = document.getElementById("controls-container");
 const toggleButton = document.getElementById("toggle-controls");
 const recordButton = document.getElementById("record-button");
+const timerElement = document.getElementById("timer");
 
 // --- Global Control Variables ---
-let controls = {
-  launchFreq: 20,
-  gravity: 0.02,
-  trailLength: 0.1,
-  speed: 2,
-  sizeMin: 1,
-  sizeMax: 3
-};
-
+let controls = { launchFreq: 20, gravity: 0.02, trailLength: 0.1, speed: 2, sizeMin: 1, sizeMax: 3 };
 let fireworks = [];
 let particles = [];
 // HSL colors provide vibrant, well-matched firework colors
@@ -51,12 +46,18 @@ const setupControlListener = (id, property, valueId, multiplier = 1, fixed = 2) 
   const slider = document.getElementById(id);
   const valueDisplay = document.getElementById(valueId);
   slider.addEventListener("input", () => {
+    if (isRecording) {
+      // Prevent changing values while recording
+      slider.value = controls[property] / multiplier;
+      return;
+    }
     const value = parseFloat(slider.value) * multiplier;
     controls[property] = value;
     valueDisplay.textContent = value.toFixed(fixed);
   });
 };
 
+// Initialize all control listeners...
 setupControlListener("launch-freq", "launchFreq", "launch-freq-value", 1, 0);
 setupControlListener("gravity", "gravity", "gravity-value", 0.01, 2);
 setupControlListener("trail-length", "trailLength", "trail-length-value", 0.01, 2);
@@ -79,26 +80,23 @@ recordButton.addEventListener("click", () => {
 
 // --- Recording Functions ---
 function startRecording() {
-  // Check for browser support
-  if (!"MediaRecorder" in window || !canvas.captureStream) {
-    alert("Your browser does not support video recording.");
+  if (!("MediaRecorder" in window) || !canvas.captureStream) {
+    // Using a custom modal instead of alert
+    showModal("Your browser does not support video recording.");
     return;
   }
   isRecording = true;
   recordButton.textContent = "Stop & Save";
   recordButton.classList.add("recording");
-  controlsContainer.classList.add("hidden"); // Hide controls completely
+  controlsContainer.classList.add("collapsed", "recording-active"); // Collapse panel and mark as recording
+
   recordedChunks = [];
 
   const stream = canvas.captureStream(60); // Capture at 60fps
-  mediaRecorder = new MediaRecorder(stream, {
-    mimeType: "video/webm; codecs=vp9"
-  });
+  mediaRecorder = new MediaRecorder(stream, { mimeType: "video/webm; codecs=vp9" });
 
   mediaRecorder.ondataavailable = (event) => {
-    if (event.data.size > 0) {
-      recordedChunks.push(event.data);
-    }
+    if (event.data.size > 0) recordedChunks.push(event.data);
   };
 
   mediaRecorder.onstop = () => {
@@ -114,6 +112,19 @@ function startRecording() {
   };
 
   mediaRecorder.start();
+
+  // Start timer
+  recordingStartTime = Date.now();
+  timerElement.textContent = "00:00";
+  timerElement.classList.add("visible");
+  timerInterval = setInterval(() => {
+    const elapsedSeconds = Math.floor((Date.now() - recordingStartTime) / 1000);
+    const minutes = Math.floor(elapsedSeconds / 60)
+      .toString()
+      .padStart(2, "0");
+    const seconds = (elapsedSeconds % 60).toString().padStart(2, "0");
+    timerElement.textContent = `${minutes}:${seconds}`;
+  }, 1000);
 }
 
 function stopRecording() {
@@ -123,11 +134,14 @@ function stopRecording() {
   isRecording = false;
   recordButton.textContent = "Record";
   recordButton.classList.remove("recording");
-  controlsContainer.classList.remove("hidden"); // Show controls again
+  controlsContainer.classList.remove("collapsed", "recording-active"); // Expand panel and remove recording state
+
+  // Stop and hide timer
+  clearInterval(timerInterval);
+  timerElement.classList.remove("visible");
 }
 
-// --- Particle Class ---
-// Represents a single point of light, used for both rocket trails and explosion effects.
+// --- Particle & Firework Classes ---
 class Particle {
   constructor(x, y, color, velocity) {
     this.x = x;
@@ -136,12 +150,12 @@ class Particle {
     this.velocity = velocity || { x: 0, y: 0 };
     this.size = random(controls.sizeMin, controls.sizeMax);
     this.alpha = 1;
-    this.decay = random(0.015, 0.03); // How fast the particle fades
+    this.decay = random(0.015, 0.03);
   }
   update() {
     this.x += this.velocity.x;
     this.y += this.velocity.y;
-    this.velocity.y += controls.gravity; // Apply gravity
+    this.velocity.y += controls.gravity;
     this.alpha -= this.decay;
   }
   draw() {
@@ -154,15 +168,12 @@ class Particle {
     ctx.restore();
   }
 }
-
 // --- Firework Class ---
 // Represents the initial rocket launch that culminates in an explosion.
 class Firework {
   constructor() {
     this.x = random(width * 0.2, width * 0.8);
     this.y = height;
-    this.startX = this.x;
-    this.startY = height;
     this.targetY = random(height * 0.2, height * 0.5);
     this.color = colors[Math.floor(random(0, colors.length))];
     this.velocity = { x: random(-1, 1), y: -controls.speed * 2.5 };
@@ -170,19 +181,15 @@ class Firework {
     this.exploded = false;
   }
   update() {
-    // If not exploded, move upwards and create a trail
     if (!this.exploded) {
       this.x += this.velocity.x;
       this.y += this.velocity.y;
-      // Add trail particles
       this.trail.push(new Particle(this.x, this.y, this.color));
-      // Check if it's time to explode
       if (this.y <= this.targetY) {
         this.exploded = true;
         this.explode();
       }
     }
-    // Update all trail particles
     for (let i = this.trail.length - 1; i >= 0; i--) {
       this.trail[i].update();
       this.trail[i].draw();
@@ -220,13 +227,8 @@ function animate() {
   ctx.fillRect(0, 0, width, height);
 
   // 2. Randomly launch new fireworks based on frequency
-  if (!isRecording && random(0, 100) < controls.launchFreq / 10) {
+  if (random(0, 100) < controls.launchFreq / 10) {
     fireworks.push(new Firework());
-  } else if (isRecording) {
-    // Ensure consistent launch rate during recording for smoother video
-    if (random(0, 100) < controls.launchFreq / 10) {
-      fireworks.push(new Firework());
-    }
   }
 
   // 3. Update and draw all active fireworks

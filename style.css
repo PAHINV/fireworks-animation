@@ -22,13 +22,8 @@ canvas {
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
   transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
 }
-.controls.hidden {
-  transform: translateX(-110%);
-  opacity: 0;
-  pointer-events: none;
-}
 .control-panel-content {
-  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, margin-bottom 0.3s ease-in-out;
   overflow: hidden;
   max-height: 500px; /* Adjust if more controls are added */
   opacity: 1;
@@ -36,7 +31,7 @@ canvas {
 .controls.collapsed .control-panel-content {
   max-height: 0;
   opacity: 0;
-  margin-top: -20px; /* To make collapse smoother */
+  margin-bottom: 0;
 }
 .toggle-button {
   position: absolute;
@@ -50,12 +45,23 @@ canvas {
   display: flex;
   align-items: center;
   justify-content: center;
+  transition: opacity 0.2s;
 }
 .toggle-button:hover {
   background: rgba(255, 255, 255, 0.2);
 }
+/* Hide toggle button during recording */
+.controls.recording-active .toggle-button {
+  opacity: 0;
+  pointer-events: none;
+}
+.record-section {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
 .record-button {
-  width: 100%;
+  flex-grow: 1;
   padding: 10px;
   background-color: #4a90e2;
   border: none;
@@ -64,7 +70,6 @@ canvas {
   border-radius: 8px;
   cursor: pointer;
   transition: background-color 0.2s;
-  margin-top: 10px;
 }
 .record-button:hover {
   background-color: #357abd;
@@ -74,6 +79,18 @@ canvas {
 }
 .record-button.recording:hover {
   background-color: #b0021b;
+}
+#timer {
+  font-variant-numeric: tabular-nums;
+  margin-left: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #eee;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+#timer.visible {
+  opacity: 1;
 }
 .control-group {
   margin-bottom: 15px;
@@ -91,7 +108,6 @@ canvas {
   background: transparent;
   cursor: pointer;
 }
-/* Styling for range input track */
 .control-group input[type="range"]::-webkit-slider-runnable-track {
   background: rgba(255, 255, 255, 0.2);
   height: 4px;
@@ -102,11 +118,10 @@ canvas {
   height: 4px;
   border-radius: 2px;
 }
-/* Styling for range input thumb */
 .control-group input[type="range"]::-webkit-slider-thumb {
   -webkit-appearance: none;
   appearance: none;
-  margin-top: -6px; /* center thumb on track */
+  margin-top: -6px;
   background-color: #4a90e2;
   height: 16px;
   width: 16px;
