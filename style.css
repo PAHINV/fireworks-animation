@@ -20,6 +20,60 @@ canvas {
   z-index: 10;
   width: 300px;
   box-shadow: 0 8px 32px 0 rgba(0, 0, 0, 0.37);
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+}
+.controls.hidden {
+  transform: translateX(-110%);
+  opacity: 0;
+  pointer-events: none;
+}
+.control-panel-content {
+  transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out;
+  overflow: hidden;
+  max-height: 500px; /* Adjust if more controls are added */
+  opacity: 1;
+}
+.controls.collapsed .control-panel-content {
+  max-height: 0;
+  opacity: 0;
+  margin-top: -20px; /* To make collapse smoother */
+}
+.toggle-button {
+  position: absolute;
+  top: 10px;
+  right: 10px;
+  cursor: pointer;
+  width: 24px;
+  height: 24px;
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.toggle-button:hover {
+  background: rgba(255, 255, 255, 0.2);
+}
+.record-button {
+  width: 100%;
+  padding: 10px;
+  background-color: #4a90e2;
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+  margin-top: 10px;
+}
+.record-button:hover {
+  background-color: #357abd;
+}
+.record-button.recording {
+  background-color: #d0021b;
+}
+.record-button.recording:hover {
+  background-color: #b0021b;
 }
 .control-group {
   margin-bottom: 15px;

@@ -13,37 +13,49 @@
   <body>
     <canvas id="fireworksCanvas"></canvas>
 
-    <div class="controls">
-      <h2 class="text-lg font-bold mb-4">Fireworks Controls</h2>
-
-      <div class="control-group">
-        <label for="launch-freq">Launch Rate <span class="value-display" id="launch-freq-value">20</span></label>
-        <input type="range" id="launch-freq" min="1" max="100" value="20" />
+    <div id="controls-container" class="controls">
+      <div class="toggle-button" id="toggle-controls">
+        <svg
+          xmlns="http://www.w3.org/2000/svg"
+          width="16"
+          height="16"
+          fill="currentColor"
+          class="bi bi-chevron-bar-contract"
+          viewBox="0 0 16 16"
+        >
+          <path
+            fill-rule="evenodd"
+            d="M3.646 14.854a.5.5 0 0 0 .708 0L8 11.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708zm0-13.708a.5.5 0 0 1 .708 0L8 4.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zM1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8z"
+          />
+        </svg>
       </div>
-
-      <div class="control-group">
-        <label for="gravity">Gravity <span class="value-display" id="gravity-value">0.02</span></label>
-        <input type="range" id="gravity" min="0" max="10" value="2" />
-      </div>
-
-      <div class="control-group">
-        <label for="trail-length">Trail Length <span class="value-display" id="trail-length-value">0.10</span></label>
-        <input type="range" id="trail-length" min="1" max="50" value="10" />
-      </div>
-
-      <div class="control-group">
-        <label for="speed">Rocket Speed <span class="value-display" id="speed-value">2</span></label>
-        <input type="range" id="speed" min="1" max="5" value="2" step="0.1" />
-      </div>
-
-      <div class="control-group">
-        <label for="size-min">Min Particle Size <span class="value-display" id="size-min-value">1</span></label>
-        <input type="range" id="size-min" min="0.5" max="5" value="1" step="0.1" />
-      </div>
-
-      <div class="control-group">
-        <label for="size-max">Max Particle Size <span class="value-display" id="size-max-value">3</span></label>
-        <input type="range" id="size-max" min="1" max="10" value="3" step="0.1" />
+      <div class="control-panel-content">
+        <h2 class="text-lg font-bold mb-4">Fireworks Controls</h2>
+        <div class="control-group">
+          <label for="launch-freq">Launch Rate <span class="value-display" id="launch-freq-value">20</span></label>
+          <input type="range" id="launch-freq" min="1" max="100" value="20" />
+        </div>
+        <div class="control-group">
+          <label for="gravity">Gravity <span class="value-display" id="gravity-value">0.02</span></label>
+          <input type="range" id="gravity" min="0" max="10" value="2" />
+        </div>
+        <div class="control-group">
+          <label for="trail-length">Trail Length <span class="value-display" id="trail-length-value">0.10</span></label>
+          <input type="range" id="trail-length" min="1" max="50" value="10" />
+        </div>
+        <div class="control-group">
+          <label for="speed">Rocket Speed <span class="value-display" id="speed-value">2</span></label>
+          <input type="range" id="speed" min="1" max="5" value="2" step="0.1" />
+        </div>
+        <div class="control-group">
+          <label for="size-min">Min Particle Size <span class="value-display" id="size-min-value">1</span></label>
+          <input type="range" id="size-min" min="0.5" max="5" value="1" step="0.1" />
+        </div>
+        <div class="control-group">
+          <label for="size-max">Max Particle Size <span class="value-display" id="size-max-value">3</span></label>
+          <input type="range" id="size-max" min="1" max="10" value="3" step="0.1" />
+        </div>
+        <button id="record-button" class="record-button">Record</button>
       </div>
     </div>
 

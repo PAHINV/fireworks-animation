@@ -6,6 +6,16 @@ let height = window.innerHeight;
 canvas.width = width;
 canvas.height = height;
 
+// --- Recording Variables ---
+let mediaRecorder;
+let recordedChunks = [];
+let isRecording = false;
+
+// --- UI Elements ---
+const controlsContainer = document.getElementById("controls-container");
+const toggleButton = document.getElementById("toggle-controls");
+const recordButton = document.getElementById("record-button");
+
 // --- Global Control Variables ---
 let controls = {
   launchFreq: 20,
@@ -54,6 +64,68 @@ setupControlListener("speed", "speed", "speed-value", 1, 1);
 setupControlListener("size-min", "sizeMin", "size-min-value", 1, 1);
 setupControlListener("size-max", "sizeMax", "size-max-value", 1, 1);
 
+// --- UI Event Listeners ---
+toggleButton.addEventListener("click", () => {
+  controlsContainer.classList.toggle("collapsed");
+});
+
+recordButton.addEventListener("click", () => {
+  if (isRecording) {
+    stopRecording();
+  } else {
+    startRecording();
+  }
+});
+
+// --- Recording Functions ---
+function startRecording() {
+  // Check for browser support
+  if (!"MediaRecorder" in window || !canvas.captureStream) {
+    alert("Your browser does not support video recording.");
+    return;
+  }
+  isRecording = true;
+  recordButton.textContent = "Stop & Save";
+  recordButton.classList.add("recording");
+  controlsContainer.classList.add("hidden"); // Hide controls completely
+  recordedChunks = [];
+
+  const stream = canvas.captureStream(60); // Capture at 60fps
+  mediaRecorder = new MediaRecorder(stream, {
+    mimeType: "video/webm; codecs=vp9"
+  });
+
+  mediaRecorder.ondataavailable = (event) => {
+    if (event.data.size > 0) {
+      recordedChunks.push(event.data);
+    }
+  };
+
+  mediaRecorder.onstop = () => {
+    const blob = new Blob(recordedChunks, { type: "video/webm" });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement("a");
+    a.href = url;
+    a.download = `fireworks-${Date.now()}.webm`;
+    document.body.appendChild(a);
+    a.click();
+    window.URL.revokeObjectURL(url);
+    document.body.removeChild(a);
+  };
+
+  mediaRecorder.start();
+}
+
+function stopRecording() {
+  if (mediaRecorder && mediaRecorder.state === "recording") {
+    mediaRecorder.stop();
+  }
+  isRecording = false;
+  recordButton.textContent = "Record";
+  recordButton.classList.remove("recording");
+  controlsContainer.classList.remove("hidden"); // Show controls again
+}
+
 // --- Particle Class ---
 // Represents a single point of light, used for both rocket trails and explosion effects.
 class Particle {
@@ -66,14 +138,12 @@ class Particle {
     this.alpha = 1;
     this.decay = random(0.015, 0.03); // How fast the particle fades
   }
-
   update() {
     this.x += this.velocity.x;
     this.y += this.velocity.y;
     this.velocity.y += controls.gravity; // Apply gravity
     this.alpha -= this.decay;
   }
-
   draw() {
     ctx.save();
     ctx.globalAlpha = this.alpha;
@@ -99,23 +169,19 @@ class Firework {
     this.trail = [];
     this.exploded = false;
   }
-
   update() {
     // If not exploded, move upwards and create a trail
     if (!this.exploded) {
       this.x += this.velocity.x;
       this.y += this.velocity.y;
-
       // Add trail particles
       this.trail.push(new Particle(this.x, this.y, this.color));
-
       // Check if it's time to explode
       if (this.y <= this.targetY) {
         this.exploded = true;
         this.explode();
       }
     }
-
     // Update all trail particles
     for (let i = this.trail.length - 1; i >= 0; i--) {
       this.trail[i].update();
@@ -125,20 +191,15 @@ class Firework {
       }
     }
   }
-
   explode() {
     const particleCount = random(100, 200);
     for (let i = 0; i < particleCount; i++) {
       const angle = random(0, Math.PI * 2);
       const speed = random(1, 5);
-      const velocity = {
-        x: Math.cos(angle) * speed,
-        y: Math.sin(angle) * speed
-      };
+      const velocity = { x: Math.cos(angle) * speed, y: Math.sin(angle) * speed };
       particles.push(new Particle(this.x, this.y, this.color, velocity));
     }
   }
-
   draw() {
     if (!this.exploded) {
       ctx.save();
@@ -154,14 +215,18 @@ class Firework {
 // --- Main Animation Loop ---
 function animate() {
   requestAnimationFrame(animate);
-
   // 1. Clear the canvas with a semi-transparent fill to create a trail effect
   ctx.fillStyle = `rgba(0, 0, 0, ${1 - controls.trailLength})`;
   ctx.fillRect(0, 0, width, height);
 
   // 2. Randomly launch new fireworks based on frequency
-  if (random(0, 100) < controls.launchFreq / 10) {
+  if (!isRecording && random(0, 100) < controls.launchFreq / 10) {
     fireworks.push(new Firework());
+  } else if (isRecording) {
+    // Ensure consistent launch rate during recording for smoother video
+    if (random(0, 100) < controls.launchFreq / 10) {
+      fireworks.push(new Firework());
+    }
   }
 
   // 3. Update and draw all active fireworks
@@ -186,6 +251,7 @@ function animate() {
 
 // --- Window Resize Handler ---
 window.addEventListener("resize", () => {
+  if (isRecording) return; // Prevent resizing during recording
   width = window.innerWidth;
   height = window.innerHeight;
   canvas.width = width;
