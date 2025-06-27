@@ -1,0 +1,51 @@
+/* Hide toggle button during recording */
+.controls.recording-active .toggle-button {
+  opacity: 0;
+  pointer-events: none;
+}
+.record-section {
+  display: flex;
+  align-items: center;
+  margin-top: 15px;
+}
+.record-button {
+  flex-grow: 1;
+  padding: 10px;
+  background-color: #4a90e2;
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background-color 0.2s;
+}
+.record-button:hover {
+  background-color: #357abd;
+}
+.record-button.recording {
+  background-color: #d0021b;
+}
+.record-button.recording:hover {
+  background-color: #b0021b;
+}
+#timer {
+  font-variant-numeric: tabular-nums;
+  margin-left: 15px;
+  font-size: 16px;
+  font-weight: 600;
+  color: #eee;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+#timer.visible {
+  opacity: 1;
+}
+.recording-settings {
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  margin-top: 15px;
+  padding-top: 15px;
+}
+.button-group {
+  display: flex;
+  gap: 5px;
+}
