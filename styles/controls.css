@@ -19,8 +19,10 @@
 .control-panel-content {
   transition: max-height 0.3s ease-in-out, opacity 0.3s ease-in-out, margin-bottom 0.3s ease-in-out;
   overflow: auto;
+  overflow-x: clip;
   flex-grow: 1;
   opacity: 1;
+  padding: 8px;
 }
 .controls.collapsed .control-panel-content {
   max-height: 0;
@@ -29,7 +31,7 @@
 }
 .toggle-button {
   position: absolute;
-  top: 10px;
+  top: 20px;
   right: 10px;
   cursor: pointer;
   width: 24px;
@@ -56,6 +58,10 @@
   transition: background-color 0.2s, border-color 0.2s;
   font-size: 13px;
   text-align: center;
+}
+.toggle-btn svg {
+  display: inline-block;
+  vertical-align: middle;
 }
 .toggle-btn:hover {
   background-color: rgba(255, 255, 255, 0.2);
@@ -132,35 +138,47 @@
   background: #4a90e2;
 }
 
+.panel-title {
+  text-align: center;
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
 .accordion-item {
   border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .accordion-header {
   width: 100%;
-  background: none;
+  background: transparent;
   border: none;
   text-align: left;
-  padding: 15px 0;
+  padding: 15px 5px;
   color: white;
   font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   outline: none;
   position: relative;
+  transition: background-color 0.2s;
 }
 
 .accordion-header::after {
-  content: "+";
+  content: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16"><path fill-rule="evenodd" d="M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z"/></svg>');
+
   position: absolute;
   right: 0;
   top: 50%;
-  transform: translateY(-50%);
-  font-size: 20px;
+  transform: translateY(-50%) rotate(90deg);
+  transition: transform 0.3s ease;
 }
 
 .accordion-item.active .accordion-header::after {
-  content: "-";
+  /* content: "-"; */
+  transform: translateY(-50%) rotate(-90deg);
 }
 
 .accordion-content {

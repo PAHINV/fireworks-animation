@@ -1,5 +1,43 @@
 import { isRecording } from "./recording.js";
 
+export function initializeControls(controls) {
+  // Initialize sliders and their value displays
+  const initSlider = (id, property, valueId, multiplier = 1, fixed = 2) => {
+    const slider = document.getElementById(id);
+    const valueDisplay = document.getElementById(valueId);
+    if (slider) {
+      const value = controls[property];
+      slider.value = value / multiplier;
+      if (valueDisplay) {
+        valueDisplay.textContent = value.toFixed(fixed);
+      }
+    }
+  };
+
+  initSlider("launch-freq", "launchFreq", "launch-freq-value", 1, 0);
+  initSlider("gravity", "gravity", "gravity-value", 0.01, 2);
+  initSlider("trail-length", "trailLength", "trail-length-value", 0.01, 2);
+  initSlider("speed", "speed", "speed-value", 1, 1);
+  initSlider("size-min", "sizeMin", "size-min-value", 1, 1);
+  initSlider("size-max", "sizeMax", "size-max-value", 1, 1);
+  initSlider("global-speed", "globalSpeed", "global-speed-value", 1, 1);
+  initSlider("particle-count", "particleCount", "particle-count-value", 1, 0);
+  initSlider("text-x", "textX", "text-x-value", 1, 0);
+  initSlider("text-y", "textY", "text-y-value", 1, 0);
+  initSlider("font-size", "fontSize", "font-size-value", 1, 0);
+  initSlider("text-opacity", "textOpacity", "text-opacity-value", 1, 2);
+
+  // Initialize other inputs
+  const textOverlay = document.getElementById("text-overlay");
+  if (textOverlay) textOverlay.value = controls.textOverlay;
+
+  const fontColor = document.getElementById("font-color");
+  if (fontColor) fontColor.value = controls.fontColor;
+
+  const fontSelect = document.getElementById("font-select");
+  if (fontSelect) fontSelect.value = controls.font;
+}
+
 export function setupControlListeners(controls) {
   const setupTextListener = (id, property) => {
     const textInput = document.getElementById(id);

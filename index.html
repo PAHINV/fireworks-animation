@@ -12,7 +12,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&family=Oswald:wght@400;700&family=Lato:wght@400;700&family=Open+Sans:wght@400;700&family=Bebas+Neue&family=Anton&family=Poppins:wght@400;700&family=Raleway:wght@400;700&family=Playfair+Display:wght@400;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Anton&family=Bebas+Neue&family=Cinzel:wght@400;700&family=Cormorant+Garamond:wght@400;700&family=Josefin+Sans:wght@400;700&family=Lato:wght@400;700&family=Lobster&family=Montserrat:wght@400;700&family=Open+Sans:wght@400;700&family=Oswald&family=Pacifico&family=Playfair+Display:wght@400;700&family=Poppins:wght@400;700&family=Raleway:wght@400;700&family=Roboto:wght@400;700&family=Source+Sans+Pro:wght@400;700&display=swap"
       rel="stylesheet"
     />
 
@@ -32,15 +32,20 @@
     <canvas id="fireworksCanvas"></canvas>
 
     <div id="controls-container" class="controls">
-      <div class="toggle-button" id="toggle-controls">
-        <!-- SVG for collapse/expand icon -->
-        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-          <path
-            fill-rule="evenodd"
-            d="M3.646 14.854a.5.5 0 0 0 .708 0L8 11.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708zm0-13.708a.5.5 0 0 1 .708 0L8 4.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zM1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8z"
-          />
-        </svg>
+      <div>
+        <h2 class="panel-title">Control Panel</h2>
+
+        <div class="toggle-button" id="toggle-controls">
+          <!-- SVG for collapse/expand icon -->
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+            <path
+              fill-rule="evenodd"
+              d="M3.646 14.854a.5.5 0 0 0 .708 0L8 11.207l3.646 3.647a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 0 0 0 .708zm0-13.708a.5.5 0 0 1 .708 0L8 4.793l3.646-3.647a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 0-.708zM1 8a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13A.5.5 0 0 1 1 8z"
+            />
+          </svg>
+        </div>
       </div>
+
       <div class="control-panel-content">
         <div class="accordion">
           <div class="accordion-item">
@@ -89,6 +94,7 @@
               </div>
             </div>
           </div>
+
           <div class="accordion-item">
             <button class="accordion-header">Text Overlay</button>
             <div class="accordion-content">
@@ -113,9 +119,48 @@
               <div class="control-group">
                 <label>Alignment</label>
                 <div class="button-group" id="text-align-toggle">
-                  <button class="toggle-btn active" data-align="center">Center</button>
-                  <button class="toggle-btn" data-align="left">Left</button>
-                  <button class="toggle-btn" data-align="right">Right</button>
+                  <button class="toggle-btn" data-align="left">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M2 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+                      />
+                    </svg>
+                  </button>
+                  <button class="toggle-btn active" data-align="center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+                      />
+                    </svg>
+                  </button>
+                  <button class="toggle-btn" data-align="right">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M6 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm4-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+                      />
+                    </svg>
+                  </button>
                 </div>
               </div>
               <div class="control-group">
@@ -123,14 +168,20 @@
                 <select id="font-select" class="font-select">
                   <option value="Anton">Anton</option>
                   <option value="Bebas Neue">Bebas Neue</option>
+                  <option value="Cinzel">Cinzel</option>
+                  <option value="Cormorant Garamond">Cormorant Garamond</option>
+                  <option value="Josefin Sans">Josefin Sans</option>
                   <option value="Lato">Lato</option>
+                  <option value="Lobster">Lobster</option>
                   <option value="Montserrat">Montserrat</option>
                   <option value="Open Sans">Open Sans</option>
                   <option value="Oswald">Oswald</option>
+                  <option value="Pacifico">Pacifico</option>
                   <option value="Playfair Display">Playfair Display</option>
                   <option value="Poppins">Poppins</option>
                   <option value="Raleway">Raleway</option>
                   <option value="Roboto">Roboto</option>
+                  <option value="Source Sans Pro">Source Sans Pro</option>
                 </select>
               </div>
 
@@ -148,6 +199,7 @@
               </div>
             </div>
           </div>
+
           <div class="accordion-item">
             <button class="accordion-header">Recording Settings</button>
             <div class="accordion-content">
