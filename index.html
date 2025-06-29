@@ -6,12 +6,16 @@
     <title>Interactive Fireworks Animation</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet" />
-
     <link rel="stylesheet" href="styles/main.css" />
     <link rel="stylesheet" href="styles/controls.css" />
     <link rel="stylesheet" href="styles/record.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Roboto:wght@400;700&family=Montserrat:wght@400;700&family=Oswald:wght@400;700&family=Lato:wght@400;700&family=Open+Sans:wght@400;700&family=Bebas+Neue&family=Anton&family=Poppins:wght@400;700&family=Raleway:wght@400;700&family=Playfair+Display:wght@400;700&display=swap"
+      rel="stylesheet"
+    />
 
-    <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-WS9RK5MYPZ"></script>
     <script>
       window.dataLayer = window.dataLayer || [];
@@ -38,61 +42,134 @@
         </svg>
       </div>
       <div class="control-panel-content">
-        <h2 class="text-lg font-bold mb-4">Fireworks Controls</h2>
-        <div class="control-group">
-          <label for="launch-freq">Launch Rate <span class="value-display" id="launch-freq-value">20</span></label>
-          <input type="range" id="launch-freq" min="1" max="100" value="20" />
-        </div>
-        <!-- Other control groups... -->
-        <div class="control-group">
-          <label for="gravity">Gravity <span class="value-display" id="gravity-value">0.02</span></label>
-          <input type="range" id="gravity" min="0" max="10" value="2" />
-        </div>
-        <div class="control-group">
-          <label for="trail-length">Trail Length <span class="value-display" id="trail-length-value">0.10</span></label>
-          <input type="range" id="trail-length" min="1" max="50" value="10" />
-        </div>
-        <div class="control-group">
-          <label for="particle-count">
-            Particles per firework
-            <span class="value-display" id="particle-count-value">150</span>
-          </label>
-          <input type="range" id="particle-count" min="50" max="250" value="150" step="1" />
-        </div>
-        <div class="control-group">
-          <label for="speed">Rocket Speed <span class="value-display" id="speed-value">2</span></label>
-          <input type="range" id="speed" min="1" max="5" value="2" step="0.1" />
-        </div>
-        <div class="control-group">
-          <label for="global-speed">Global Speed <span class="value-display" id="global-speed-value">1.0</span></label>
-          <input type="range" id="global-speed" min="0.1" max="2" value="1" step="0.1" />
-        </div>
-        <div class="control-group">
-          <label for="size-min">Min Particle Size <span class="value-display" id="size-min-value">1</span></label>
-          <input type="range" id="size-min" min="0.5" max="5" value="1" step="0.1" />
-        </div>
-        <div class="control-group">
-          <label for="size-max">Max Particle Size <span class="value-display" id="size-max-value">3</span></label>
-          <input type="range" id="size-max" min="1" max="10" value="3" step="0.1" />
-        </div>
-
-        <div class="recording-settings">
-          <h3 class="text-md font-bold mb-3">Recording Settings</h3>
-          <div class="control-group">
-            <label>Resolution</label>
-            <div class="button-group" id="resolution-toggle">
-              <button class="toggle-btn" data-resolution="sd">SD</button>
-              <button class="toggle-btn active" data-resolution="hd">HD</button>
-              <button class="toggle-btn" data-resolution="2k">2K</button>
-              <button class="toggle-btn" data-resolution="4k">4K</button>
+        <div class="accordion">
+          <div class="accordion-item">
+            <button class="accordion-header">Fireworks Controls</button>
+            <div class="accordion-content">
+              <div class="control-group">
+                <label for="launch-freq"
+                  >Launch Rate <span class="value-display" id="launch-freq-value">20</span></label
+                >
+                <input type="range" id="launch-freq" min="1" max="100" value="20" />
+              </div>
+              <div class="control-group">
+                <label for="gravity">Gravity <span class="value-display" id="gravity-value">0.02</span></label>
+                <input type="range" id="gravity" min="0" max="10" value="2" />
+              </div>
+              <div class="control-group">
+                <label for="trail-length"
+                  >Trail Length <span class="value-display" id="trail-length-value">0.10</span></label
+                >
+                <input type="range" id="trail-length" min="1" max="50" value="10" />
+              </div>
+              <div class="control-group">
+                <label for="particle-count">
+                  Particles per firework
+                  <span class="value-display" id="particle-count-value">150</span>
+                </label>
+                <input type="range" id="particle-count" min="50" max="250" value="150" step="1" />
+              </div>
+              <div class="control-group">
+                <label for="speed">Rocket Speed <span class="value-display" id="speed-value">2</span></label>
+                <input type="range" id="speed" min="1" max="5" value="2" step="0.1" />
+              </div>
+              <div class="control-group">
+                <label for="global-speed"
+                  >Global Speed <span class="value-display" id="global-speed-value">1.0</span></label
+                >
+                <input type="range" id="global-speed" min="0.1" max="2" value="1" step="0.1" />
+              </div>
+              <div class="control-group">
+                <label for="size-min">Min Particle Size <span class="value-display" id="size-min-value">1</span></label>
+                <input type="range" id="size-min" min="0.5" max="5" value="1" step="0.1" />
+              </div>
+              <div class="control-group">
+                <label for="size-max">Max Particle Size <span class="value-display" id="size-max-value">3</span></label>
+                <input type="range" id="size-max" min="1" max="10" value="3" step="0.1" />
+              </div>
             </div>
           </div>
-          <div class="control-group">
-            <label>Framerate</label>
-            <div class="button-group" id="framerate-toggle">
-              <button class="toggle-btn" data-framerate="30">30</button>
-              <button class="toggle-btn active" data-framerate="60">60</button>
-              <button class="toggle-btn" data-framerate="120">120</button>
+          <div class="accordion-item">
+            <button class="accordion-header">Text Overlay</button>
+            <div class="accordion-content">
+              <div class="control-group">
+                <label for="text-overlay">Text</label>
+                <textarea
+                  id="text-overlay"
+                  class="text-input"
+                  placeholder="Enter text here"
+                  maxlength="500"
+                  rows="3"
+                ></textarea>
+              </div>
+              <div class="control-group">
+                <label for="text-x">Position X <span class="value-display" id="text-x-value">50</span></label>
+                <input type="range" id="text-x" min="0" max="100" value="50" />
+              </div>
+              <div class="control-group">
+                <label for="text-y">Position Y <span class="value-display" id="text-y-value">50</span></label>
+                <input type="range" id="text-y" min="0" max="100" value="50" />
+              </div>
+              <div class="control-group">
+                <label>Alignment</label>
+                <div class="button-group" id="text-align-toggle">
+                  <button class="toggle-btn active" data-align="center">Center</button>
+                  <button class="toggle-btn" data-align="left">Left</button>
+                  <button class="toggle-btn" data-align="right">Right</button>
+                </div>
+              </div>
+              <div class="control-group">
+                <label for="font-select">Font</label>
+                <select id="font-select" class="font-select">
+                  <option value="Anton">Anton</option>
+                  <option value="Bebas Neue">Bebas Neue</option>
+                  <option value="Lato">Lato</option>
+                  <option value="Montserrat">Montserrat</option>
+                  <option value="Open Sans">Open Sans</option>
+                  <option value="Oswald">Oswald</option>
+                  <option value="Playfair Display">Playfair Display</option>
+                  <option value="Poppins">Poppins</option>
+                  <option value="Raleway">Raleway</option>
+                  <option value="Roboto">Roboto</option>
+                </select>
+              </div>
+
+              <div class="control-group">
+                <label for="font-size">Font Size <span class="value-display" id="font-size-value">48</span></label>
+                <input type="range" id="font-size" min="12" max="128" value="48" />
+              </div>
+              <div class="control-group">
+                <label for="font-color">Font Color</label>
+                <input type="color" id="font-color" class="color-input" value="#FFFFFF" />
+              </div>
+              <div class="control-group">
+                <label for="text-opacity">Opacity <span class="value-display" id="text-opacity-value">1.0</span></label>
+                <input type="range" id="text-opacity" min="0" max="1" value="1" step="0.05" />
+              </div>
+            </div>
+          </div>
+          <div class="accordion-item">
+            <button class="accordion-header">Recording Settings</button>
+            <div class="accordion-content">
+              <div class="recording-settings">
+                <div class="control-group">
+                  <label>Resolution</label>
+                  <div class="button-group" id="resolution-toggle">
+                    <button class="toggle-btn" data-resolution="sd">SD</button>
+                    <button class="toggle-btn active" data-resolution="hd">HD</button>
+                    <button class="toggle-btn" data-resolution="2k">2K</button>
+                    <button class="toggle-btn" data-resolution="4k">4K</button>
+                  </div>
+                </div>
+                <div class="control-group">
+                  <label>Framerate</label>
+                  <div class="button-group" id="framerate-toggle">
+                    <button class="toggle-btn" data-framerate="30">30</button>
+                    <button class="toggle-btn active" data-framerate="60">60</button>
+                    <button class="toggle-btn" data-framerate="120">120</button>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

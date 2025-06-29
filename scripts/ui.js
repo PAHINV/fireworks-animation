@@ -4,6 +4,7 @@ export function setupUI(controls) {
   // --- UI Elements ---
   const controlsContainer = document.getElementById("controls-container");
   const toggleButton = document.getElementById("toggle-controls");
+  const accordionItems = document.querySelectorAll(".accordion-item");
   const recordButton = document.getElementById("record-button");
 
   // --- UI Event Listeners ---
@@ -14,6 +15,25 @@ export function setupUI(controls) {
       }
     });
   }
+
+  accordionItems.forEach((item) => {
+    const header = item.querySelector(".accordion-header");
+    const content = item.querySelector(".accordion-content");
+    header.addEventListener("click", () => {
+      const currentlyActive = document.querySelector(".accordion-item.active");
+      if (currentlyActive && currentlyActive !== item) {
+        currentlyActive.classList.remove("active");
+        currentlyActive.querySelector(".accordion-content").style.maxHeight = 0;
+      }
+
+      item.classList.toggle("active");
+      if (item.classList.contains("active")) {
+        content.style.maxHeight = content.scrollHeight + "px";
+      } else {
+        content.style.maxHeight = 0;
+      }
+    });
+  });
 
   if (recordButton) {
     recordButton.addEventListener("click", () => {

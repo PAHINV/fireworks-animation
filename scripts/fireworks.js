@@ -107,6 +107,25 @@ class Firework {
   }
 }
 
+function drawText(controls) {
+  if (controls.textOverlay) {
+    ctx.save();
+    const x = width * (controls.textX / 100);
+    const y = height * (controls.textY / 100);
+    ctx.font = `700 ${controls.fontSize}px ${controls.font}`;
+    ctx.textAlign = controls.textAlign;
+
+    ctx.fillStyle = controls.fontColor;
+    ctx.globalAlpha = controls.textOpacity;
+    const lines = controls.textOverlay.split("\n");
+    lines.forEach((line, index) => {
+      ctx.fillText(line, x, y + index * controls.fontSize);
+    });
+
+    ctx.restore();
+  }
+}
+
 // --- Main Animation Loop ---
 export function animate(controls) {
   requestAnimationFrame(() => animate(controls));
@@ -138,6 +157,9 @@ export function animate(controls) {
       particles.splice(i, 1);
     }
   }
+
+  // 5. Draw the text overlay
+  drawText(controls);
 }
 
 // --- Window Resize Handler ---

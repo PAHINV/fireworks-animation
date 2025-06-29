@@ -13,7 +13,15 @@ const controls = {
   globalSpeed: 1,
   particleCount: 150,
   resolution: "hd",
-  framerate: 60
+  framerate: 60,
+  textOverlay: "",
+  textX: 50,
+  textY: 50,
+  textAlign: "center",
+  font: "Roboto",
+  fontSize: 48,
+  fontColor: "#FFFFFF",
+  textOpacity: 1
 };
 
 // --- Start the animation ---
