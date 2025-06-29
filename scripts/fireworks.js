@@ -131,7 +131,8 @@ export function animate(controls) {
   requestAnimationFrame(() => animate(controls));
 
   // 1. Clear the canvas with a semi-transparent fill to create a trail effect
-  ctx.fillStyle = `rgba(0, 0, 0, ${1 - controls.trailLength})`;
+  // ctx.fillStyle = `rgba(0, 0, 0, ${1 - controls.trailLength})`;
+  ctx.fillStyle = controls.backgroundColor;
   ctx.fillRect(0, 0, width, height);
 
   // 2. Randomly launch new fireworks based on frequency

@@ -4,6 +4,7 @@ import { setupUI } from "./ui.js";
 
 // --- Global Control Variables ---
 const controls = {
+  backgroundColor: "#000000",
   launchFreq: 28,
   gravity: 0.02,
   trailLength: 0.1,

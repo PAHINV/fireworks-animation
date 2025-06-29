@@ -58,6 +58,7 @@ export function setupControlListeners(controls) {
 
   const setupColorListener = (id, property) => {
     const colorInput = document.getElementById(id);
+
     if (colorInput) {
       colorInput.addEventListener("input", () => {
         controls[property] = colorInput.value;
@@ -85,6 +86,7 @@ export function setupControlListeners(controls) {
   };
 
   // Initialize all control listeners...
+  setupColorListener("bg-color", "backgroundColor");
   setupControlListener("launch-freq", "launchFreq", "launch-freq-value", 1, 0);
   setupControlListener("gravity", "gravity", "gravity-value", 0.01, 2);
   setupControlListener("trail-length", "trailLength", "trail-length-value", 0.01, 2);

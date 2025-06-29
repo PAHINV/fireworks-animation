@@ -8,3 +8,23 @@ body {
 canvas {
   display: block;
 }
+
+.star-button {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background-color: #24292e;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  z-index: 10;
+  transition: background-color 0.2s;
+}
+.star-button:hover {
+  background-color: #333;
+}
