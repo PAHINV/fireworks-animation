@@ -22,20 +22,33 @@ export function initializeControls(controls) {
   initSlider("size-max", "sizeMax", "size-max-value", 1, 1);
   initSlider("global-speed", "globalSpeed", "global-speed-value", 1, 1);
   initSlider("particle-count", "particleCount", "particle-count-value", 1, 0);
-  initSlider("text-x", "textX", "text-x-value", 1, 0);
-  initSlider("text-y", "textY", "text-y-value", 1, 0);
-  initSlider("font-size", "fontSize", "font-size-value", 1, 0);
-  initSlider("text-opacity", "textOpacity", "text-opacity-value", 1, 2);
+  initSlider("text-1-x", "text1X", "text-1-x-value", 1, 0);
+  initSlider("text-1-y", "text1Y", "text-1-y-value", 1, 0);
+  initSlider("font-1-size", "font1Size", "font-1-size-value", 1, 0);
+  initSlider("text-1-opacity", "text1Opacity", "text-1-opacity-value", 1, 2);
+  initSlider("text-2-x", "text2X", "text-2-x-value", 1, 0);
+  initSlider("text-2-y", "text2Y", "text-2-y-value", 1, 0);
+  initSlider("font-2-size", "font2Size", "font-2-size-value", 1, 0);
+  initSlider("text-2-opacity", "text2Opacity", "text-2-opacity-value", 1, 2);
 
   // Initialize other inputs
-  const textOverlay = document.getElementById("text-overlay");
-  if (textOverlay) textOverlay.value = controls.textOverlay;
+  const text1Overlay = document.getElementById("text-1-overlay");
+  if (text1Overlay) text1Overlay.value = controls.text1Overlay;
 
-  const fontColor = document.getElementById("font-color");
-  if (fontColor) fontColor.value = controls.fontColor;
+  const font1Color = document.getElementById("font-1-color");
+  if (font1Color) font1Color.value = controls.font1Color;
 
-  const fontSelect = document.getElementById("font-select");
-  if (fontSelect) fontSelect.value = controls.font;
+  const font1Select = document.getElementById("font-1-select");
+  if (font1Select) font1Select.value = controls.font1;
+
+  const text2Overlay = document.getElementById("text-2-overlay");
+  if (text2Overlay) text2Overlay.value = controls.text2Overlay;
+
+  const font2Color = document.getElementById("font-2-color");
+  if (font2Color) font2Color.value = controls.font2Color;
+
+  const font2Select = document.getElementById("font-2-select");
+  if (font2Select) font2Select.value = controls.font2;
 }
 
 export function setupControlListeners(controls) {
@@ -95,13 +108,24 @@ export function setupControlListeners(controls) {
   setupControlListener("size-max", "sizeMax", "size-max-value", 1, 1);
   setupControlListener("global-speed", "globalSpeed", "global-speed-value", 1, 1);
   setupControlListener("particle-count", "particleCount", "particle-count-value", 1, 0);
-  setupControlListener("text-x", "textX", "text-x-value", 1, 0);
-  setupControlListener("text-y", "textY", "text-y-value", 1, 0);
-  setupTextListener("text-overlay", "textOverlay");
-  setupColorListener("font-color", "fontColor");
-  setupControlListener("font-size", "fontSize", "font-size-value", 1, 0);
-  setupControlListener("text-opacity", "textOpacity", "text-opacity-value", 1, 2);
-  setupSelectListener("font-select", "font");
+
+  // Text 1
+  setupControlListener("text-1-x", "text1X", "text-1-x-value", 1, 0);
+  setupControlListener("text-1-y", "text1Y", "text-1-y-value", 1, 0);
+  setupTextListener("text-1-overlay", "text1Overlay");
+  setupColorListener("font-1-color", "font1Color");
+  setupControlListener("font-1-size", "font1Size", "font-1-size-value", 1, 0);
+  setupControlListener("text-1-opacity", "text1Opacity", "text-1-opacity-value", 1, 2);
+  setupSelectListener("font-1-select", "font1");
+
+  // Text 2
+  setupControlListener("text-2-x", "text2X", "text-2-x-value", 1, 0);
+  setupControlListener("text-2-y", "text2Y", "text-2-y-value", 1, 0);
+  setupTextListener("text-2-overlay", "text2Overlay");
+  setupColorListener("font-2-color", "font2Color");
+  setupControlListener("font-2-size", "font2Size", "font-2-size-value", 1, 0);
+  setupControlListener("text-2-opacity", "text2Opacity", "text-2-opacity-value", 1, 2);
+  setupSelectListener("font-2-select", "font2");
 
   // --- Event Listeners for Toggles ---
   const setupToggleListener = (containerId, property, dataAttribute) => {
@@ -121,5 +145,6 @@ export function setupControlListeners(controls) {
 
   setupToggleListener("resolution-toggle", "resolution", "resolution");
   setupToggleListener("framerate-toggle", "framerate", "framerate");
-  setupToggleListener("text-align-toggle", "textAlign", "align");
+  setupToggleListener("text-1-align-toggle", "text1Align", "align");
+  setupToggleListener("text-2-align-toggle", "text2Align", "align");
 }

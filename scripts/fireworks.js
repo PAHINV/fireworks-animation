@@ -108,18 +108,35 @@ class Firework {
 }
 
 function drawText(controls) {
-  if (controls.textOverlay) {
+  if (controls.text1Overlay) {
     ctx.save();
-    const x = width * (controls.textX / 100);
-    const y = height * (controls.textY / 100);
-    ctx.font = `700 ${controls.fontSize}px ${controls.font}`;
-    ctx.textAlign = controls.textAlign;
+    const x = width * (controls.text1X / 100);
+    const y = height * (controls.text1Y / 100);
+    ctx.font = `700 ${controls.font1Size}px ${controls.font1}`;
+    ctx.textAlign = controls.text1Align;
 
-    ctx.fillStyle = controls.fontColor;
-    ctx.globalAlpha = controls.textOpacity;
-    const lines = controls.textOverlay.split("\n");
+    ctx.fillStyle = controls.font1Color;
+    ctx.globalAlpha = controls.text1Opacity;
+    const lines = controls.text1Overlay.split("\n");
     lines.forEach((line, index) => {
-      ctx.fillText(line, x, y + index * controls.fontSize);
+      ctx.fillText(line, x, y + index * controls.font1Size);
+    });
+
+    ctx.restore();
+  }
+
+  if (controls.text2Overlay) {
+    ctx.save();
+    const x = width * (controls.text2X / 100);
+    const y = height * (controls.text2Y / 100);
+    ctx.font = `700 ${controls.font2Size}px ${controls.font2}`;
+    ctx.textAlign = controls.text2Align;
+
+    ctx.fillStyle = controls.font2Color;
+    ctx.globalAlpha = controls.text2Opacity;
+    const lines = controls.text2Overlay.split("\n");
+    lines.forEach((line, index) => {
+      ctx.fillText(line, x, y + index * controls.font2Size);
     });
 
     ctx.restore();

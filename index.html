@@ -101,12 +101,12 @@
           </div>
 
           <div class="accordion-item">
-            <button class="accordion-header">Text Overlay</button>
+            <button class="accordion-header">Text Overlay 1</button>
             <div class="accordion-content">
               <div class="control-group">
-                <label for="text-overlay">Text</label>
+                <label for="text-1-overlay">Text</label>
                 <textarea
-                  id="text-overlay"
+                  id="text-1-overlay"
                   class="text-input"
                   placeholder="Enter text here"
                   maxlength="500"
@@ -114,16 +114,16 @@
                 ></textarea>
               </div>
               <div class="control-group">
-                <label for="text-x">Position X <span class="value-display" id="text-x-value">50</span></label>
-                <input type="range" id="text-x" min="0" max="100" value="50" />
+                <label for="text-1-x">Position X <span class="value-display" id="text-1-x-value">50</span></label>
+                <input type="range" id="text-1-x" min="0" max="100" value="50" />
               </div>
               <div class="control-group">
-                <label for="text-y">Position Y <span class="value-display" id="text-y-value">50</span></label>
-                <input type="range" id="text-y" min="0" max="100" value="50" />
+                <label for="text-1-y">Position Y <span class="value-display" id="text-1-y-value">50</span></label>
+                <input type="range" id="text-1-y" min="0" max="100" value="50" />
               </div>
               <div class="control-group">
                 <label>Alignment</label>
-                <div class="button-group" id="text-align-toggle">
+                <div class="button-group" id="text-1-align-toggle">
                   <button class="toggle-btn" data-align="left">
                     <svg
                       xmlns="http://www.w3.org/2000/svg"
@@ -169,8 +169,8 @@
                 </div>
               </div>
               <div class="control-group">
-                <label for="font-select">Font</label>
-                <select id="font-select" class="font-select">
+                <label for="font-1-select">Font</label>
+                <select id="font-1-select" class="font-select">
                   <option value="Anton">Anton</option>
                   <option value="Bebas Neue">Bebas Neue</option>
                   <option value="Cinzel">Cinzel</option>
@@ -191,16 +191,125 @@
               </div>
 
               <div class="control-group">
-                <label for="font-size">Font Size <span class="value-display" id="font-size-value">48</span></label>
-                <input type="range" id="font-size" min="12" max="128" value="48" />
+                <label for="font-1-size">Font Size <span class="value-display" id="font-1-size-value">48</span></label>
+                <input type="range" id="font-1-size" min="12" max="128" value="48" />
               </div>
               <div class="control-group">
-                <label for="font-color">Font Color</label>
-                <input type="color" id="font-color" class="color-input" value="#FFFFFF" />
+                <label for="font-1-color">Font Color</label>
+                <input type="color" id="font-1-color" class="color-input" value="#FFFFFF" />
               </div>
               <div class="control-group">
-                <label for="text-opacity">Opacity <span class="value-display" id="text-opacity-value">1.0</span></label>
-                <input type="range" id="text-opacity" min="0" max="1" value="1" step="0.05" />
+                <label for="text-1-opacity"
+                  >Opacity <span class="value-display" id="text-1-opacity-value">1.0</span></label
+                >
+                <input type="range" id="text-1-opacity" min="0" max="1" value="1" step="0.05" />
+              </div>
+            </div>
+          </div>
+
+          <div class="accordion-item">
+            <button class="accordion-header">Text Overlay 2</button>
+            <div class="accordion-content">
+              <div class="control-group">
+                <label for="text-2-overlay">Text</label>
+                <textarea
+                  id="text-2-overlay"
+                  class="text-input"
+                  placeholder="Enter text here"
+                  maxlength="500"
+                  rows="3"
+                ></textarea>
+              </div>
+              <div class="control-group">
+                <label for="text-2-x">Position X <span class="value-display" id="text-2-x-value">50</span></label>
+                <input type="range" id="text-2-x" min="0" max="100" value="50" />
+              </div>
+              <div class="control-group">
+                <label for="text-2-y">Position Y <span class="value-display" id="text-2-y-value">50</span></label>
+                <input type="range" id="text-2-y" min="0" max="100" value="50" />
+              </div>
+              <div class="control-group">
+                <label>Alignment</label>
+                <div class="button-group" id="text-2-align-toggle">
+                  <button class="toggle-btn" data-align="left">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M2 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+                      />
+                    </svg>
+                  </button>
+                  <button class="toggle-btn active" data-align="center">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M4 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm2-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-2-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+                      />
+                    </svg>
+                  </button>
+                  <button class="toggle-btn" data-align="right">
+                    <svg
+                      xmlns="http://www.w3.org/2000/svg"
+                      width="16"
+                      height="16"
+                      fill="currentColor"
+                      viewBox="0 0 16 16"
+                    >
+                      <path
+                        fill-rule="evenodd"
+                        d="M6 12.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5zm4-3a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm-4-3a.5.5 0 0 1 .5-.5h11a.5.5 0 0 1 0 1h-11a.5.5 0 0 1-.5-.5z"
+                      />
+                    </svg>
+                  </button>
+                </div>
+              </div>
+              <div class="control-group">
+                <label for="font-2-select">Font</label>
+                <select id="font-2-select" class="font-select">
+                  <option value="Anton">Anton</option>
+                  <option value="Bebas Neue">Bebas Neue</option>
+                  <option value="Cinzel">Cinzel</option>
+                  <option value="Cormorant Garamond">Cormorant Garamond</option>
+                  <option value="Josefin Sans">Josefin Sans</option>
+                  <option value="Lato">Lato</option>
+                  <option value="Lobster">Lobster</option>
+                  <option value="Montserrat">Montserrat</option>
+                  <option value="Open Sans">Open Sans</option>
+                  <option value="Oswald">Oswald</option>
+                  <option value="Pacifico">Pacifico</option>
+                  <option value="Playfair Display">Playfair Display</option>
+                  <option value="Poppins">Poppins</option>
+                  <option value="Raleway">Raleway</option>
+                  <option value="Roboto">Roboto</option>
+                  <option value="Source Sans Pro">Source Sans Pro</option>
+                </select>
+              </div>
+
+              <div class="control-group">
+                <label for="font-2-size">Font Size <span class="value-display" id="font-2-size-value">48</span></label>
+                <input type="range" id="font-2-size" min="12" max="128" value="48" />
+              </div>
+              <div class="control-group">
+                <label for="font-2-color">Font Color</label>
+                <input type="color" id="font-2-color" class="color-input" value="#FFFFFF" />
+              </div>
+              <div class="control-group">
+                <label for="text-2-opacity"
+                  >Opacity <span class="value-display" id="text-2-opacity-value">1.0</span></label
+                >
+                <input type="range" id="text-2-opacity" min="0" max="1" value="1" step="0.05" />
               </div>
             </div>
           </div>

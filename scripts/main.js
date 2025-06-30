@@ -13,18 +13,29 @@ const controls = {
   sizeMax: 3,
   globalSpeed: 1,
   particleCount: 150,
-  resolution: "hd",
-  framerate: 60,
-  textOverlay: `HAPPY
+
+  text1Overlay: `HAPPY
 4th of 
 JULY`,
-  textX: 50,
-  textY: 44,
-  textAlign: "center",
-  font: "Playfair Display",
-  fontSize: 80,
-  fontColor: "#bbadff",
-  textOpacity: 1
+  text1X: 50,
+  text1Y: 44,
+  text1Align: "center",
+  font1: "Playfair Display",
+  font1Size: 80,
+  font1Color: "#bbadff",
+  text1Opacity: 1,
+
+  text2Overlay: `independence day`,
+  text2X: 50,
+  text2Y: 70,
+  text2Align: "center",
+  font2: "Lobster",
+  font2Size: 40,
+  font2Color: "#cff028",
+  text2Opacity: 1,
+
+  resolution: "hd",
+  framerate: 60
 };
 
 // --- Start the animation ---
