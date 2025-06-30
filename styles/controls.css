@@ -210,3 +210,31 @@
 textarea.text-input {
   resize: vertical;
 }
+
+.popup-content .star-button {
+  background-color: #24292e;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 15px 0;
+  transition: background-color 0.2s;
+}
+
+.popup-content .coffee-button {
+  background-color: #24292e;
+  color: yellow;
+  padding: 10px 15px;
+  border-radius: 8px;
+  text-decoration: none;
+  font-weight: 600;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin: 15px 0;
+  transition: background-color 0.2s;
+}

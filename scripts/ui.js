@@ -1,4 +1,5 @@
 import { startRecording, stopRecording, isRecording } from "./recording.js";
+import { changelogData } from "./changelog.js";
 
 export function setupUI(controls) {
   // --- UI Elements ---
@@ -6,6 +7,11 @@ export function setupUI(controls) {
   const toggleButton = document.getElementById("toggle-controls");
   const accordionItems = document.querySelectorAll(".accordion-item");
   const recordButton = document.getElementById("record-button");
+
+  const changelogButton = document.getElementById("changelog-button");
+  const changelogPopup = document.getElementById("changelog-popup");
+  const closePopupButton = document.getElementById("close-popup");
+  const changelogContentContainer = document.getElementById("changelog-content-container");
 
   // --- UI Event Listeners ---
   if (toggleButton) {
@@ -43,5 +49,31 @@ export function setupUI(controls) {
         startRecording(controls);
       }
     });
+  }
+
+  if (changelogButton) {
+    changelogButton.addEventListener("click", () => {
+      changelogPopup.classList.add("visible");
+    });
+  }
+
+  if (closePopupButton) {
+    closePopupButton.addEventListener("click", () => {
+      changelogPopup.classList.remove("visible");
+    });
+  }
+
+  if (changelogPopup) {
+    changelogPopup.addEventListener("click", (e) => {
+      if (e.target === changelogPopup) {
+        // Close if backdrop is clicked
+        changelogPopup.classList.remove("visible");
+      }
+    });
+  }
+
+  // Populate changelog content
+  if (changelogContentContainer) {
+    changelogContentContainer.innerHTML = changelogData;
   }
 }
