@@ -183,6 +183,12 @@ export function renderFrame(controls) {
   drawText(controls);
 }
 
+// --- Clears all active fireworks and particles from the canvas. ---
+export function resetAnimation() {
+  fireworks = [];
+  particles = [];
+}
+
 // --- Main Animation Loop ---
 export function animate(controls) {
   renderFrame(controls);

@@ -1,3 +1,5 @@
+import { resetAnimation } from "./fireworks.js";
+
 let mediaRecorder;
 let recordedChunks = [];
 
@@ -13,6 +15,9 @@ function startRecording(canvas, framerate) {
     alert("Your browser does not support video recording.");
     return;
   }
+
+  // Start fresh animation
+  resetAnimation();
 
   if (recordButton) {
     recordButton.textContent = "Stop & Save";
