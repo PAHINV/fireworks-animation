@@ -1,4 +1,4 @@
-import { isRecording } from "./recording.js";
+// import { isRecording } from "./recording.js";
 
 export function initializeControls(controls) {
   // Initialize sliders and their value displays
@@ -80,15 +80,21 @@ export function setupControlListeners(controls) {
   };
 
   // --- Event Listeners for Controls ---
-  const setupControlListener = (id, property, valueId, multiplier = 1, fixed = 2) => {
+  const setupControlListener = (
+    id,
+    property,
+    valueId,
+    multiplier = 1,
+    fixed = 2
+  ) => {
     const slider = document.getElementById(id);
     const valueDisplay = document.getElementById(valueId);
     if (slider) {
       slider.addEventListener("input", () => {
-        if (isRecording()) {
+        /* if (isRecording()) {
           slider.value = controls[property] / multiplier;
           return;
-        }
+        } */
         const value = parseFloat(slider.value) * multiplier;
         controls[property] = value;
         if (valueDisplay) {
@@ -102,12 +108,30 @@ export function setupControlListeners(controls) {
   setupColorListener("bg-color", "backgroundColor");
   setupControlListener("launch-freq", "launchFreq", "launch-freq-value", 1, 0);
   setupControlListener("gravity", "gravity", "gravity-value", 0.01, 2);
-  setupControlListener("trail-length", "trailLength", "trail-length-value", 0.01, 2);
+  setupControlListener(
+    "trail-length",
+    "trailLength",
+    "trail-length-value",
+    0.01,
+    2
+  );
   setupControlListener("speed", "speed", "speed-value", 1, 1);
   setupControlListener("size-min", "sizeMin", "size-min-value", 1, 1);
   setupControlListener("size-max", "sizeMax", "size-max-value", 1, 1);
-  setupControlListener("global-speed", "globalSpeed", "global-speed-value", 1, 1);
-  setupControlListener("particle-count", "particleCount", "particle-count-value", 1, 0);
+  setupControlListener(
+    "global-speed",
+    "globalSpeed",
+    "global-speed-value",
+    1,
+    1
+  );
+  setupControlListener(
+    "particle-count",
+    "particleCount",
+    "particle-count-value",
+    1,
+    0
+  );
 
   // Text 1
   setupControlListener("text-1-x", "text1X", "text-1-x-value", 1, 0);
@@ -115,7 +139,13 @@ export function setupControlListeners(controls) {
   setupTextListener("text-1-overlay", "text1Overlay");
   setupColorListener("font-1-color", "font1Color");
   setupControlListener("font-1-size", "font1Size", "font-1-size-value", 1, 0);
-  setupControlListener("text-1-opacity", "text1Opacity", "text-1-opacity-value", 1, 2);
+  setupControlListener(
+    "text-1-opacity",
+    "text1Opacity",
+    "text-1-opacity-value",
+    1,
+    2
+  );
   setupSelectListener("font-1-select", "font1");
 
   // Text 2
@@ -124,7 +154,13 @@ export function setupControlListeners(controls) {
   setupTextListener("text-2-overlay", "text2Overlay");
   setupColorListener("font-2-color", "font2Color");
   setupControlListener("font-2-size", "font2Size", "font-2-size-value", 1, 0);
-  setupControlListener("text-2-opacity", "text2Opacity", "text-2-opacity-value", 1, 2);
+  setupControlListener(
+    "text-2-opacity",
+    "text2Opacity",
+    "text-2-opacity-value",
+    1,
+    2
+  );
   setupSelectListener("font-2-select", "font2");
 
   // --- Event Listeners for Toggles ---
@@ -132,7 +168,7 @@ export function setupControlListeners(controls) {
     const container = document.getElementById(containerId);
     if (!container) return;
     container.addEventListener("click", (e) => {
-      if (isRecording() || !e.target.matches(".toggle-btn")) return;
+      // if (isRecording() || !e.target.matches(".toggle-btn")) return;
 
       const value = e.target.dataset[dataAttribute];
       controls[property] = isNaN(value) ? value : parseInt(value, 10);

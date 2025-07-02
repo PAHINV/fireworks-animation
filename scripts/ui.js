@@ -1,4 +1,4 @@
-import { startRecording, stopRecording, isRecording } from "./recording.js";
+import { startRecording, stopRecording } from "./recording.js";
 import { changelogData } from "./changelog.js";
 
 export function setupUI(controls) {
@@ -6,12 +6,18 @@ export function setupUI(controls) {
   const controlsContainer = document.getElementById("controls-container");
   const toggleButton = document.getElementById("toggle-controls");
   const accordionItems = document.querySelectorAll(".accordion-item");
+  const fullscreenButton = document.getElementById("fullscreen-button");
   const recordButton = document.getElementById("record-button");
 
   const changelogButton = document.getElementById("changelog-button");
   const changelogPopup = document.getElementById("changelog-popup");
   const closePopupButton = document.getElementById("close-popup");
-  const changelogContentContainer = document.getElementById("changelog-content-container");
+  const changelogContentContainer = document.getElementById(
+    "changelog-content-container"
+  );
+
+  const canvas = document.getElementById("fireworksCanvas");
+  let isRecording = false;
 
   // --- UI Event Listeners ---
   if (toggleButton) {
@@ -43,10 +49,27 @@ export function setupUI(controls) {
 
   if (recordButton) {
     recordButton.addEventListener("click", () => {
-      if (isRecording()) {
-        stopRecording(controls);
+      isRecording = !isRecording;
+      if (isRecording) {
+        startRecording(canvas, 60); // Start recording at 60fps
+        // recordButton.textContent = "Stop Recording";
       } else {
-        startRecording(controls);
+        stopRecording();
+        // recordButton.textContent = "Start Recording";
+      }
+    });
+  }
+
+  if (fullscreenButton) {
+    fullscreenButton.addEventListener("click", () => {
+      if (!document.fullscreenElement) {
+        document.body.requestFullscreen();
+        document.body.setAttribute("fullscreen", "");
+        fullscreenButton.innerHTML = "Exit Fullscreen";
+      } else {
+        document.exitFullscreen();
+        document.body.removeAttribute("fullscreen");
+        fullscreenButton.innerHTML = "Go Fullscreen";
       }
     });
   }
