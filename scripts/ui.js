@@ -6,6 +6,7 @@ export function setupUI(controls) {
   const controlsContainer = document.getElementById("controls-container");
   const toggleButton = document.getElementById("toggle-controls");
   const accordionItems = document.querySelectorAll(".accordion-item");
+  const fullscreenButton = document.getElementById("fullscreen-button");
   const recordButton = document.getElementById("record-button");
 
   const changelogButton = document.getElementById("changelog-button");
@@ -55,6 +56,20 @@ export function setupUI(controls) {
       } else {
         stopRecording();
         // recordButton.textContent = "Start Recording";
+      }
+    });
+  }
+
+  if (fullscreenButton) {
+    fullscreenButton.addEventListener("click", () => {
+      if (!document.fullscreenElement) {
+        document.body.requestFullscreen();
+        document.body.setAttribute("fullscreen", "");
+        fullscreenButton.innerHTML = "Exit Fullscreen";
+      } else {
+        document.exitFullscreen();
+        document.body.removeAttribute("fullscreen");
+        fullscreenButton.innerHTML = "Go Fullscreen";
       }
     });
   }
