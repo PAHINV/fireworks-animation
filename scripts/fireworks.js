@@ -70,7 +70,9 @@ class Firework {
     if (!this.exploded) {
       this.x += this.velocity.x * this.controls.globalSpeed;
       this.y += this.velocity.y * this.controls.globalSpeed;
-      this.trail.push(new Particle(this.x, this.y, this.color, undefined, this.controls));
+      this.trail.push(
+        new Particle(this.x, this.y, this.color, undefined, this.controls)
+      );
       if (this.y <= this.targetY) {
         this.exploded = true;
         this.explode();
@@ -90,8 +92,13 @@ class Firework {
     for (let i = 0; i < particleCount; i++) {
       const angle = random(0, Math.PI * 2);
       const speed = random(1, 5);
-      const velocity = { x: Math.cos(angle) * speed, y: Math.sin(angle) * speed };
-      particles.push(new Particle(this.x, this.y, this.color, velocity, this.controls));
+      const velocity = {
+        x: Math.cos(angle) * speed,
+        y: Math.sin(angle) * speed
+      };
+      particles.push(
+        new Particle(this.x, this.y, this.color, velocity, this.controls)
+      );
     }
   }
 
@@ -143,16 +150,13 @@ function drawText(controls) {
   }
 }
 
-// --- Main Animation Loop ---
-export function animate(controls) {
-  requestAnimationFrame(() => animate(controls));
-
-  // 1. Clear the canvas with a semi-transparent fill to create a trail effect
-  // ctx.fillStyle = `rgba(0, 0, 0, ${1 - controls.trailLength})`;
+// Render a single frame
+export function renderFrame(controls) {
+  // 1. Clear the canvas
   ctx.fillStyle = controls.backgroundColor;
   ctx.fillRect(0, 0, width, height);
 
-  // 2. Randomly launch new fireworks based on frequency
+  // 2. Randomly launch new fireworks (if needed)
   if (random(0, 100) < controls.launchFreq / 10) {
     fireworks.push(new Firework(controls));
   }
@@ -161,7 +165,6 @@ export function animate(controls) {
   for (let i = fireworks.length - 1; i >= 0; i--) {
     fireworks[i].update();
     fireworks[i].draw();
-    // Remove the firework once it has exploded and its trail has faded
     if (fireworks[i].exploded && fireworks[i].trail.length === 0) {
       fireworks.splice(i, 1);
     }
@@ -178,6 +181,12 @@ export function animate(controls) {
 
   // 5. Draw the text overlay
   drawText(controls);
+}
+
+// --- Main Animation Loop ---
+export function animate(controls) {
+  renderFrame(controls);
+  requestAnimationFrame(() => animate(controls));
 }
 
 // --- Window Resize Handler ---

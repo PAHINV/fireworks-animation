@@ -1,4 +1,4 @@
-import { startRecording, stopRecording, isRecording } from "./recording.js";
+import { startRecording, stopRecording } from "./recording.js";
 import { changelogData } from "./changelog.js";
 
 export function setupUI(controls) {
@@ -11,7 +11,12 @@ export function setupUI(controls) {
   const changelogButton = document.getElementById("changelog-button");
   const changelogPopup = document.getElementById("changelog-popup");
   const closePopupButton = document.getElementById("close-popup");
-  const changelogContentContainer = document.getElementById("changelog-content-container");
+  const changelogContentContainer = document.getElementById(
+    "changelog-content-container"
+  );
+
+  const canvas = document.getElementById("fireworksCanvas");
+  let isRecording = false;
 
   // --- UI Event Listeners ---
   if (toggleButton) {
@@ -43,10 +48,13 @@ export function setupUI(controls) {
 
   if (recordButton) {
     recordButton.addEventListener("click", () => {
-      if (isRecording()) {
-        stopRecording(controls);
+      isRecording = !isRecording;
+      if (isRecording) {
+        startRecording(canvas, 60); // Start recording at 60fps
+        // recordButton.textContent = "Stop Recording";
       } else {
-        startRecording(controls);
+        stopRecording();
+        // recordButton.textContent = "Start Recording";
       }
     });
   }
