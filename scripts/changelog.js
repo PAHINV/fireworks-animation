@@ -17,24 +17,29 @@ export const changelogData = `
     Support the project
     </a>
 
-    <h3>v1.3.0 (July 29, 2025)</h3>
+    <h3>v1.3.0 (July 1, 2025)</h3>
+    <ul>
+        <li>Fixed recording issues. Now recording is smooth and lag free. Also, you can now control fireworks while recording.</li>
+    </ul>
+
+    <h3>v1.3.0 (July 1, 2025)</h3>
     <ul>
         <li>Added text overlay 2.</li>
         <li>Added changelog.</li>
     </ul>
 
-    <h3>v1.2.0 (July 29, 2025)</h3>
+    <h3>v1.2.0 (June 29, 2025)</h3>
     <ul>
         <li>Added text overlay with customizable position, font, size, and color.</li>
     </ul>
 
-    <h3>v1.1.0 (July 28, 2025)</h3>
+    <h3>v1.1.0 (June 28, 2025)</h3>
     <ul>
         <li>Full control over fireworks physics, text overlay, and background color.</li>
         <li>High-quality video recording up to 4K @ 120fps.</li>
     </ul>
     
-    <h3>v1.0.0 (July 1, 2025)</h3>
+    <h3>v1.0.0 (June 1, 2025)</h3>
     <ul>
         <li>Initial Release!</li>
     </ul>
